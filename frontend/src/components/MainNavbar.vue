@@ -10,17 +10,24 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <div class="navbar-nav mr-auto">
+          <div class="btn-group" role="group">
+            <button class="btn btn-secondary" @click="toggleSidebar">
+              <i class="fas fa-bars"></i>
+            </button>
+            <button class="btn btn-dark" @click="() => $router.go(-1)">
+              <i class="fas fa-arrow-left"></i>
+            </button>
           <div class="dropdown" v-if="offices.length > 1">
             <a
-              class="btn dropdown-toggle text-dark"
+              class="btn dropdown-toggle btn-light"
               href="#"
               role="button"
-              id="dropdownMenuLink"
+              id="navbarOffices"
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
             >{{selectedOffice.name || "Sucursales"}}</a>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <div class="dropdown-menu" aria-labelledby="navbarOffices">
               <button
                 class="dropdown-item pointer"
                 :class="{'active':selectedOffice.id == data.id}"
@@ -30,13 +37,6 @@
               >{{data.name}}</button>
             </div>
           </div>
-          <div class="btn-group" role="group">
-            <button class="btn btn-secondary" @click="toggleSidebar">
-              <i class="fas fa-bars"></i>
-            </button>
-            <button class="btn btn-dark" @click="() => $router.go(-1)">
-              <i class="fas fa-arrow-left"></i>
-            </button>
           </div>
         </div>
         <div class="navbar-nav ml-auto">

@@ -30,6 +30,10 @@ class AuthServiceProvider extends ServiceProvider
         Passport::tokensCan([
             'is-admin' => 'Check if is admin',
             'is-customer' => 'Check if is customer',
+            'sales' => 'Sales management',
+            'purchases' => 'Purchases management',
+            'stock' => 'Stock management',
+            'general' => 'General management',
         ]);
     }
 }

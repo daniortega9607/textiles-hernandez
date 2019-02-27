@@ -33,8 +33,8 @@ const NavLink = {
           </a>
           {
             this.show
-            ? this.item.children.map(item => <NavLink item={item} class='pl-5' />)
-            : null
+              ? this.item.children.map(item => <NavLink item={item} class='pl-5' />)
+              : null
           }
         </div>
       )
@@ -46,6 +46,13 @@ const NavLink = {
   }
 }
 
+const RenderOffices = ({props}) => props.offices.map(office =>
+  <button
+    class={{ 'dropdown-item': true, pointer: true }}
+    onClick={() => props.clickHandler(office)}
+  >{office.name}</button>
+)
+
 const MainSidebar = {
   props: {
     user: { required: true },
@@ -53,12 +60,37 @@ const MainSidebar = {
     showSidebar: { default: false },
     menu: { default: () => [] }
   },
+  computed: {
+    ...mapState("app", ["offices", "selectedOffice"])
+  },
+  methods: {
+    ...mapActions('app', ['selectOffice'])
+  },
   render(h) {
     return (
       <div id='sidebar-wrapper' class={{ 'show-sidebar': this.showSidebar }}>
         <div class="h-100 sidebar-component">
           <nav class="nav flex-column">
-            { this.menu.map(item => <NavLink item={item} />) }
+            {this.menu.map(item => <NavLink item={item} />)}
+            {this.offices.length > 1
+              ? <div class="dropdown">
+                <a
+                  class="dropdown-toggle nav-link d-block d-md-none"
+                  href="#"
+                  role="button"
+                  id="sidebarOffices"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >{this.selectedOffice.name || "Sucursales"}</a>
+                <div class="dropdown-menu" aria-labelledby="sidebarOffices">
+                  {
+                    <RenderOffices offices={this.offices} clickHandler={this.selectOffice}/>
+                  }
+                </div>
+              </div>
+              : null
+            }
             <a class="nav-link" onClick={this.handleLogout}>
               Cerrar Sesión
               <i class="fas fa-sign-out-alt float-right"></i>

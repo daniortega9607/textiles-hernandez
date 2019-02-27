@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.4fbf5cb05f250f5eb49aa0d55acd307a.js"
+  "/precache-manifest.7663280660e293e2ea0b0396e178dfce.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "michel2"});
